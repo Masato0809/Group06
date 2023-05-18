@@ -172,8 +172,9 @@ def find_pH_3():
     Vb = float(input("Enter volume of a strong base: "))
     Veq = float((Ma*Va)/Mb)
     Ka = float(input("Enter the acid dissociation constant: "))
-    β = (((((10**(-28))*((Va+Veq)**2))/(2*(Mb**2)*((Vb+Ka*(Va+Veq)/Mb)**2)))*(1+math.sqrt(1+4*((Ka*Mb*(Veq+(Ka*(Va+Veq)/Mb)))/((10**(-14))*(Va+Veq))))))+(Ka*(10**(-14))*(Va+Veq))/(Mb*(Veq+(Ka*(Va+Veq)/Mb))))**(-1/2)
-    pH = (math.log10(β))-(math.asinh((((Veq-Vb)*Mb/(Va+Vb))+((10**(-14))/Ka))/2*β*(10**(-14)))/math.log(10))
+    β = (((((10**(-28))*((Va+Veq)**2))/(2*(Mb**2)*((Veq+Ka*(Va+Veq)/Mb)**2)))*\
+          (1+math.sqrt(1+4*((Ka*Mb*(Veq+(Ka*(Va+Veq)/Mb)))/((10**(-14))*(Va+Veq))))))+(Ka*(10**(-14))*(Va+Veq))/(Mb*(Veq+(Ka*(Va+Veq)/Mb))))**(-1/2)
+    pH = (math.log10(β))-(1/math.log(10))*math.asinh((1/(2*β*(10**(-14))))*(((Veq-Vb)*Mb)/(Va+Vb)+((10**(-14))/Ka)))
     print(f"The pH is {pH}")
 
 def find_pH_4():
@@ -184,8 +185,9 @@ def find_pH_4():
     Va = float(input("Enter volume of a strong acid: "))
     Veq = float((Mb*Vb)/Ma)
     Kb = float(input("Enter the base dissociation constant: "))
-    β = ((((10**(-28))*((Vb+Veq)**2)/2*(Ma**2)((Va+Kb*(Vb+Veq)/Ma)**2))*(1+math.sqrt(1+4*(Kb*Ma(Veq+Kb(Vb+Veq)/Ma))/(10**(-14))*(Vb+Veq))))+(Kb*(10**(-14))(Vb+Veq))/Ma(Veq+Kb(Vb+Veq)/Ma))**(-1/2)
-    pH = -math.log10(β)-math.asinh((((Veq-Va)*Ma/(Vb+Va))+((10**(-14))/Kb))/2*β*(10**(-14)))/math.log(10)
+    β = (((((10**(-28))*((Vb+Veq)**2))/(2*(Ma**2)*((Veq+Kb*(Vb+Veq)/Ma)**2)))*\
+          (1+math.sqrt(1+4*((Kb*Ma*(Veq+(Kb*(Vb+Veq)/Ma)))/((10**(-14))*(Vb+Veq))))))+(Kb*(10**(-14))*(Vb+Veq))/(Ma*(Veq+(Kb*(Vb+Veq)/Ma))))**(-1/2)
+    pH = 14-(math.log10(β))+(1/math.log(10))*math.asinh((1/(2*β*(10**(-14))))*(((Veq-Va)*Ma)/(Vb+Va)+((10**(-14))/Kb)))
     print(f"The pH is {pH}")
 
 # ask whether a balancing or pH
@@ -226,12 +228,3 @@ elif choice == "2":
 
 else:
     print("Invalid input")
-
-
-"""
-balanced_equation = balancing("Na3PO4 + MgCl2 = NaCl + Mg3(PO4)2")
-is_combustion("Na3PO4 + MgCl2 = NaCl + Mg3(PO4)2", balanced_equation)
-"""
-# C2O2H2+HCHO+NH3=H2O+C3N2H4
-# C3H8O+C13H19O8I=C3H6O+C9H9O4I+C2H6O2
-# Na3PO4+MgCl2=NaCl+Mg3(PO4)2
