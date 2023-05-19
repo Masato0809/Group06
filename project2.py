@@ -125,24 +125,33 @@ def is_combustion(equation, balanced_equation):
     # split equation into reactants and products
     reactants, products = equation.split('=')
     
+    reactants_1 = reactants.split("+")
+    products_1 = products.split("+")  
+    
     # conditions to detect combustion reaction 
-    O2_reactant = "O2" in reactants
+    O2_reactant = "O2" in reactants_1
     C_reactant = "C" in reactants
-    H2O_product = "H2O" in products
+    H2O_product = "H2O" in products_1
    
-    CO_product = "CO" in products
-    C_product = "C" in products 
+    CO_product = "CO" in products_1
+    C_product = "C" in products_1
 
     # conditions to check if its complete or incomplete
     if balanced_equation == "2H2 + O2 = 2H2O":
         print("This is a combustion reaction equation")
         print("The reaction is complete")
+    elif balanced_equation == "C + O2 = CO2":
+        print("This is a combustion reaction equation")
+        print("The reaction is complete")
+    elif balanced_equation == "2C + O2 = 2CO":
+        print("This is a combustion reaction eqation")
+        print("The reaction is incomplete")    
     elif O2_reactant and C_reactant and H2O_product:
         print ("This is a combustion reaction equation")
         if CO_product or C_product:
-            print("The reaction is complete")
-        else:
             print("The reaction is incomplete")
+        else:
+            print("The reaction is complete")
     else:
         print("This is not a combustion reaction equation")
 
